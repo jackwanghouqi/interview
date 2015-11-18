@@ -1,4 +1,6 @@
-package interview;
+package interview.print;
+
+import java.util.Arrays;
 
 public class SpiralPrinter {
 
@@ -21,6 +23,11 @@ public class SpiralPrinter {
 		printer.print(arr0);
 		printer.print(arr1);
 		printer.print(arr2);
+		
+		String[] x = new String[]{""};
+		String[] y = new String[]{""};
+		System.out.println(Arrays.equals(x, y));
+		System.out.println(x.equals(y));
 	}
 
 	public void print(String[][] arr) {
