@@ -1,4 +1,4 @@
-package algorithm.leetcode.SpiralPrinter;
+package leetcode.SpiralPrinter;
 
 import java.util.Arrays;
 
