@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+/**
+ * An implementation of {@link MeasurementQueryService} supporting range timestamp query for reported metrics (Measurement).
+ * It underlying relay on implement of {@link MeasurementStore} which is actually providing the query service.
+ */
 @Service
 public class MeasurementQueryServiceImpl implements MeasurementQueryService {
 
