@@ -4,7 +4,7 @@ Feature: Get a measurement
 
   Background:
    # POST /measurements
-   Given I have submitted new measurements as follows:
+    Given I have submitted new measurements as follows:
       | timestamp                  | temperature | dewPoint | precipitation |
       | "2015-09-01T16:00:00.000Z" | 27.1        | 16.7     | 0             |
       | "2015-09-01T16:10:00.000Z" | 27.3        | 16.9     | 0             |
@@ -25,3 +25,15 @@ Feature: Get a measurement
     # GET /measurements/2015-09-01T16:50:00.000Z
     When I get a measurement for "2015-09-01T16:50:00.000Z"
     Then the response has a status code of 404
+
+  @new
+  Scenario: Cannot get a measurement with invalid timestamp
+    # GET /measurements/yyyy-09-01T16:50:00.000Z
+    When I get a measurement for "yyyy-09-01T16:50:00.000Z"
+    Then the response has a status code of 400
+
+  @new
+  Scenario: Cannot get a measurement without timestamp
+    # GET /measurements/
+    When I get a measurement for ""
+    Then the response has a status code of 405

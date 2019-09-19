@@ -1,17 +1,19 @@
-
 Feature: Get measurement statistics
   In order to understand trends of measurements
   I want to be able to get statistics over specified periods of time
 
   Background:
     Given I have submitted new measurements as follows:
-      | timestamp                  | temperature | dewPoint |
-      | "2015-09-01T16:00:00.000Z" | 27.1        | 16.9     |
-      | "2015-09-01T16:10:00.000Z" | 27.3        |          |
-      | "2015-09-01T16:20:00.000Z" | 27.5        | 17.1     |
-      | "2015-09-01T16:30:00.000Z" | 27.4        | 17.3     |
-      | "2015-09-01T16:40:00.000Z" | 27.2        |          |
-      | "2015-09-01T17:00:00.000Z" | 28.1        | 18.3     |
+      | timestamp                  | temperature | dewPoint | humidity |
+      | "2015-09-01T16:00:00.000Z" | 27.1        | 16.9     |          |
+      | "2015-09-01T16:10:00.000Z" | 27.3        |          |          |
+      | "2015-09-01T16:20:00.000Z" | 27.5        | 17.1     |          |
+      | "2015-09-01T16:30:00.000Z" | 27.4        | 17.3     |          |
+      | "2015-09-01T16:40:00.000Z" | 27.2        |          |          |
+      | "2015-09-01T17:00:00.000Z" | 28.1        | 18.3     |          |
+      | "2015-09-01T18:00:00.000Z" | 27.1        |          | 0.45     |
+      | "2015-09-01T18:10:00.000Z" | 27.3        |          | 0.41     |
+      | "2015-09-01T18:20:00.000Z" | 27.5        |          | 0.43     |
 
   Scenario: Get stats for a well-reported metric
     # GET /stats?<params...>
@@ -47,6 +49,24 @@ Feature: Get measurement statistics
       | "dewPoint" | "max"     | 17.3  |
       | "dewPoint" | "average" | 17.1  |
 
+  @new
+  Scenario: Get stats for a newly added metric
+     # GET /stats?<params...>
+    When I get stats with parameters:
+      | param        | value                    |
+      | stat         | min                      |
+      | stat         | max                      |
+      | stat         | average                  |
+      | metric       | humidity                 |
+      | fromDateTime | 2015-09-01T16:00:00.000Z |
+      | toDateTime   | 2015-09-01T18:20:00.000Z |
+    Then the response has a status code of 200
+    And the response body is an array of:
+      | metric     | stat      | value |
+      | "humidity" | "min"     | 0.41  |
+      | "humidity" | "max"     | 0.45  |
+      | "humidity" | "average" | 0.43  |
+
   Scenario: Get stats for a metric that has never been reported
      # GET /stats?<params...>
     When I get stats with parameters:
@@ -57,6 +77,20 @@ Feature: Get measurement statistics
       | metric       | precipitation            |
       | fromDateTime | 2015-09-01T16:00:00.000Z |
       | toDateTime   | 2015-09-01T17:00:00.000Z |
+    Then the response has a status code of 200
+    And the response body is an empty array
+
+  @new
+  Scenario: Get stats for an empty reported metric that has been reported before
+     # GET /stats?<params...>
+    When I get stats with parameters:
+      | param        | value                    |
+      | stat         | min                      |
+      | stat         | max                      |
+      | stat         | average                  |
+      | metric       | dewPoint                 |
+      | fromDateTime | 2015-09-01T18:00:00.000Z |
+      | toDateTime   | 2015-09-01T18:20:00.000Z |
     Then the response has a status code of 200
     And the response body is an empty array
 
