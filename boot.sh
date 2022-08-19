@@ -3,4 +3,4 @@ export JAVA_HOME="/opt/jdk-10.0.1"
 export PATH="${JAVA_HOME}/bin:$PATH:${JAVA_HOME}/bin"
 echo $PATH
 chmod 777 gradlew
-./gradlew --stacktrace bootRun
+./gradlew --stacktrace bootRun > interview.log &
