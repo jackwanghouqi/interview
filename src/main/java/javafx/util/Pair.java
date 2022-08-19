@@ -6,7 +6,7 @@
 package javafx.util;
 
 import java.io.Serializable;
-import javafx.beans.NamedArg;
+//import javafx.beans.NamedArg;
 
 public class Pair<K, V> implements Serializable {
     private K key;
@@ -20,7 +20,7 @@ public class Pair<K, V> implements Serializable {
         return this.value;
     }
 
-    public Pair(@NamedArg("key") K key, @NamedArg("value") V value) {
+    public Pair(K key, V value) {
         this.key = key;
         this.value = value;
     }
