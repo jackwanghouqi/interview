@@ -1,0 +1,13 @@
+server:
+  port: 8086
+logging:
+  level:
+    .: info
+    org.springframework: info
+
+---
+spring:
+  resources:
+    static-locations: "src/main/java/interview"
+
+name: interview

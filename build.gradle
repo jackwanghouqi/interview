@@ -27,14 +27,36 @@ repositories {
 
 dependencies {
     //compile group: 'slf4j', name: 'log4j', version: '1.2.17'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
     compile group: 'junit', name: 'junit', version: '4.0'
     compile group: 'org.apache.lucene', name: 'lucene-core', version: '7.3.1'
     compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '7.3.1'
     compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '7.3.1'
     compile group: 'colt', name: 'colt', version: '1.2.0'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.1.8.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.8.RELEASE'
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.8.RELEASE'){
+        exclude module: "spring-boot-starter-logging"
+        exclude module: "logback-classic"
+    }
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.9'
     compile group: 'io.cucumber', name: 'cucumber-core', version: '4.7.2'
+    compile group: 'io.cucumber', name: 'cucumber-core', version: '4.7.2'
+    compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.0.0'
+    compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '3.0.0'
+}
+
+jar {
+    zip64 true
+    archiveName = "interview.jar"
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes 'Main-Class': 'app.App'
+    }
+
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 
 }

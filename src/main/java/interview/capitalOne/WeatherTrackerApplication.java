@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class WeatherTrackerApplication implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
   private static final int DEFAULT_PORT = 8000; // this is what HackerRank expects
 
