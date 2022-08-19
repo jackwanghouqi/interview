@@ -11,13 +11,12 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
-sourceCompatibility = 9
-
+sourceCompatibility = 1.8
 
 idea {
     project {
-        jdkName = '9'
-        languageLevel = '9'
+        jdkName = '1.8'
+        languageLevel = '1.8'
     }
 }
 
