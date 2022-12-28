@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package javafx.util;
+package util;
 
 import java.io.Serializable;
 //import javafx.beans.NamedArg;

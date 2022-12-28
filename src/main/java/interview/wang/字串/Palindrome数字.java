@@ -1,7 +1,7 @@
 package interview.wang.字串;
 
 public class Palindrome数字 {
-    /*★★【Half Half 比较】  O(n)   如果 n = number of digits O(log10(n))*/
+    /*★★【反转一半，然后比较剩下的一半】  O(n)   如果 n = number of digits O(log10(n))*/
     public boolean isPalindrome(int x) {
         // 排除 负数 或者 尾数为0的非0数
         if(x < 0 || (x % 10 == 0 && x != 0)) {
